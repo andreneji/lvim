@@ -147,7 +147,7 @@ vim.cmd([[
 vim.cmd("nmap <C-p> <Plug>MarkdownPreviewToggle")
 
 -- Ḣabilita/desabilita o destaque de coluna
-vim.cmd("nmap <space><space>  :set cuc!<cr>")
+vim.cmd("nmap <c-a><space>  :set cuc!<cr>")
 
 -- lua vim.lsp.buf.formatting()
 -- keymap("n", "<c-a>f", ":Format<cr>", opts)

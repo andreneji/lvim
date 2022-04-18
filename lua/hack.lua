@@ -53,23 +53,26 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
--- On entering insert mode in any file, scroll the window so the cursor line is centered
+-- On entering insert mode in any file, scroll the window so the cursor
+-- line is centered, and others
 lvim.autocommands.custom_groups = {
-  {"InsertEnter", "*", ":normal zz"},
+  {"InsertEnter", "*", ":normal zz"},  -- {"InsertLeave", "*", ":normal zz"},
+  {"InsertEnter", "*", ":set cuc!"},    {"InsertLeave", "*", ":set cuc!"},
+  {"WinEnter", "*", ":set cursorline"}, {"WinLeave", "*", ":set nocursorline"},
 }
 
 -- Cursor bean "|"
-vim.cmd("set guicursor= ")
+-- vim.cmd("set guicursor= ")
 
 -- ḣabilita/desabilita o destaque de coluna ao entrar/sair do insert mode"
       -- ao sair do buffer, desabilita destaque de linha
       -- ao entrar no buffer, habilita destaque de linha
-vim.cmd([[
-      autocmd InsertEnter,InsertLeave * set cuc!
+-- vim.cmd([[
+--       autocmd InsertEnter,InsertLeave * set cuc!
 
-      au WinLeave * set nocursorline
-      au WinEnter * set cursorline
-]])
+--       au WinLeave * set nocursorline
+--       au WinEnter * set cursorline
+-- ]])
 
 -- Gruvbox config.
 vim.cmd([[
@@ -78,9 +81,9 @@ vim.cmd([[
 ]])
       -- hi Normal guibg=NONE ctermbg=NONE
 
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+-- vim.cmd "set whichwrap+=<,>,[,],h,l"
+-- vim.cmd [[set iskeyword+=-]]
+-- vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 
 -- Ranger in a floatin window
       -- Make Ranger replace Netrw and be the file explorer
@@ -147,12 +150,12 @@ vim.cmd([[
 -- ]])
 
 -- " 0=disable, 1=enable (def)
-vim.cmd([[
-      let g:pencil#autoformat = 1
+-- vim.cmd([[
+--       let g:pencil#autoformat = 1
 
-      augroup pencil
-        autocmd!
-        autocmd FileType markdown,mkd,md call pencil#init({'wrap': 'hard', 'autoformat': 1})
-        autocmd FileType text            call pencil#init({'wrap': 'hard', 'autoformat': 0})
-      augroup END
-]])
+--       augroup pencil
+--         autocmd!
+--         autocmd FileType markdown,mkd,md call pencil#init({'wrap': 'hard', 'autoformat': 1})
+--         autocmd FileType text            call pencil#init({'wrap': 'hard', 'autoformat': 0})
+--       augroup END
+-- ]])

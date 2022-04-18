@@ -86,8 +86,8 @@ vim.cmd([[
     :endfunction
 ]])
 
--- vim.cmd([[nmap  <leader><leader>  :call TrimWhiteSpace()<CR>]])
--- vim.cmd([[nmap! <leader><leader>  :call TrimWhiteSpace()<CR>]])
+vim.cmd([[nmap  <c-a>q  :call TrimWhiteSpace()<CR>]])
+-- vim.cmd([[nmap! <c-a>q  :call TrimWhiteSpace()<CR>]])
 
 -- Removes trailing spaces before saving
-vim.cmd([[autocmd BufWritePre * :%s/\s\+$//e]])
+-- vim.cmd([[autocmd BufWritePre * :%s/\s\+$//e]])

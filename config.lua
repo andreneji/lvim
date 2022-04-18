@@ -155,11 +155,16 @@ lvim.plugins = {
     {"gruvbox-community/gruvbox"},
 
   -- Others
+    {
+      "folke/trouble.nvim",
+      cmd = "TroubleToggle",
+    },
     {"junegunn/limelight.vim"},
     {"junegunn/goyo.vim"},                 -- On / Off - paragrafos
     {"unblevable/quick-scope"},            -- Destaca caracter da palavra/frase na linha
     {"terryma/vim-multiple-cursors"},      -- Altera palavas em linhas diferentes em tempo real
     {"szw/vim-maximizer"},                 -- Minimizar/maximar buffers
+    {"tpope/vim-fugitive"},                -- vim + git
     {"kevinhwang91/rnvimr"},               -- Ranger in a floatin window
     {"mattn/emmet-vim"},                   -- Formata comandos com abrev. ex: htlm:5 e css / inclui tags entre os textos
     {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'},
@@ -173,3 +178,10 @@ lvim.plugins = {
 require ("func")
 require ("map")
 require ("hack")
+
+
+-- Tentativa de não exibir + diagnostico virtual no código, e sim apenas na lateral
+-- vim.lsp.diagnostic.virtual_text = false
+--vim.cmd("autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()")
+
+-- vim.lsp.diagnostic.LvimFiles.show_line_diagnostics()
