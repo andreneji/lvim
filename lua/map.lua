@@ -11,6 +11,7 @@
 -- (M=ALT e S=Shift)
 
 vim.cmd([[
+    nnoremap <c-a>cus       :vs $HOME/.config/lvim/lua/config_custom.lua<cr>
     nnoremap <c-a>ini       :vs $HOME/.config/lvim/config.lua<cr>
     nnoremap <c-a>hac       :vs $HOME/.config/lvim/lua/hack.lua<cr>
     nnoremap <c-a>map       :vs $HOME/.config/lvim/lua/map.lua<cr>

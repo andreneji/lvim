@@ -8,7 +8,7 @@
 -- ==== Options / variables ====
 
 local options = {
-  backup = false,                          -- creates a backup file
+  backup = false,                           -- creates a backup file
   -- clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
   -- cmdheight = 2,                           -- more space in the neovim command line for displaying messages
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
@@ -53,26 +53,11 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
--- On entering insert mode in any file, scroll the window so the cursor
 -- line is centered, and others
-lvim.autocommands.custom_groups = {
-  {"InsertEnter", "*", ":normal zz"},  -- {"InsertLeave", "*", ":normal zz"},
-  {"InsertEnter", "*", ":set cuc!"},    {"InsertLeave", "*", ":set cuc!"},
-  {"WinEnter", "*", ":set cursorline"}, {"WinLeave", "*", ":set nocursorline"},
-}
-
--- Cursor bean "|"
--- vim.cmd("set guicursor= ")
-
--- ḣabilita/desabilita o destaque de coluna ao entrar/sair do insert mode"
-      -- ao sair do buffer, desabilita destaque de linha
-      -- ao entrar no buffer, habilita destaque de linha
--- vim.cmd([[
---       autocmd InsertEnter,InsertLeave * set cuc!
-
---       au WinLeave * set nocursorline
---       au WinEnter * set cursorline
--- ]])
+vim.api.nvim_create_autocmd("InsertEnter", { pattern = "*", command = "normal zz" })
+vim.api.nvim_create_autocmd({"InsertEnter", "InsertLeave" }, { pattern = "*", command = "set cuc!" })
+vim.api.nvim_create_autocmd("WinEnter", { pattern = "*", command = "set cursorline" })
+vim.api.nvim_create_autocmd("WinLeave", { pattern = "*", command = "set nocursorline" })
 
 -- Gruvbox config.
 vim.cmd([[
@@ -104,41 +89,42 @@ vim.cmd([[
       let g:rnvimr_border_attr = {'fg': 15, 'bg': -1}
       let g:rnvimr_enable_bw = 1
       let g:rnvimr_shadow_winblend = 70
-      let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
+      let g:rnvimr_ranger_cmd = ['ranger', '--cmd=set draw_borders both']
 ]])
+      -- let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
 
 -- Markdown
 -- set to 1, nvim will open the preview window after entering the markdown buffer
 -- default: 0
-vim.cmd([[
-      let g:mkdp_auto_start = 0
-      let g:mkdp_auto_close = 1
-      let g:mkdp_refresh_slow = 0
-      let g:mkdp_command_for_global = 0
-      let g:mkdp_open_to_the_world = 0
-      let g:mkdp_open_ip = ''
-      let g:mkdp_browser = ''
-      let g:mkdp_echo_preview_url = 0
-      let g:mkdp_browserfunc = ''
-      let g:mkdp_preview_options = {
-          \ 'mkit': {},
-          \ 'katex': {},
-          \ 'uml': {},
-          \ 'maid': {},
-          \ 'disable_sync_scroll': 0,
-          \ 'sync_scroll_type': 'middle',
-          \ 'hide_yaml_meta': 1,
-          \ 'sequence_diagrams': {},
-          \ 'flowchart_diagrams': {},
-          \ 'content_editable': v:false,
-          \ 'disable_filename': 0
-          \ }
-      let g:mkdp_markdown_css = ''
-      let g:mkdp_highlight_css = ''
-      let g:mkdp_port = ''
-      let g:mkdp_page_title = '「${name}」'
-      let g:mkdp_filetypes = ['markdown']
-]])
+-- vim.cmd([[
+--       let g:mkdp_auto_start = 0
+--       let g:mkdp_auto_close = 1
+--       let g:mkdp_refresh_slow = 0
+--       let g:mkdp_command_for_global = 0
+--       let g:mkdp_open_to_the_world = 0
+--       let g:mkdp_open_ip = ''
+--       let g:mkdp_browser = ''
+--       let g:mkdp_echo_preview_url = 0
+--       let g:mkdp_browserfunc = ''
+--       let g:mkdp_preview_options = {
+--           \ 'mkit': {},
+--           \ 'katex': {},
+--           \ 'uml': {},
+--           \ 'maid': {},
+--           \ 'disable_sync_scroll': 0,
+--           \ 'sync_scroll_type': 'middle',
+--           \ 'hide_yaml_meta': 1,
+--           \ 'sequence_diagrams': {},
+--           \ 'flowchart_diagrams': {},
+--           \ 'content_editable': v:false,
+--           \ 'disable_filename': 0
+--           \ }
+--       let g:mkdp_markdown_css = ''
+--       let g:mkdp_highlight_css = ''
+--       let g:mkdp_port = ''
+--       let g:mkdp_page_title = '「${name}」'
+--       let g:mkdp_filetypes = ['markdown']
+-- ]])
 
 -- Vim-Pencil
 -- vim.cmd([[
