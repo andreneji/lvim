@@ -1,3 +1,10 @@
+-- ┌─────────────────────────────────────────┐
+-- │        LvimFiles by André Lima          │
+-- ├─────────────────────────────────────────┤
+-- | email: andreneji@gmail.com              |
+-- | https://github.com/andreneji/lvim/      |
+-- └─────────────────────────────────────────┘
+
 --[[
 lvim is the global options object
 
@@ -12,18 +19,8 @@ an executable
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "gruvbox"
--- lvim.colorscheme = "onedarker"
 -- lvim.transparent_window = true
 -- vim.opt.timeoutlen = 500
-
--- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
--- add your own keymapping
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = false
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -38,7 +35,6 @@ lvim.builtin.telescope.defaults.mappings = {
   },
   -- for normal mode
   n = {
-    -- ["<Cwhich_key-j>"] = actions.move_selection_next,
     ["<C-j>"] = actions.move_selection_next,
     ["<C-k>"] = actions.move_selection_previous,
   },
@@ -50,53 +46,15 @@ lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
+  --}
 }
 
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
--- lvim.builtin.dashboard.active = true
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.notify.active = true
-lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
+-- generic LSP settings
 
--- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
-}
-
-lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
-
--- -- generic LSP settings
-
--- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = false
-
--- ---@usage Select which servers should be configured manually. Requires `:LvimCacheReset` to take effect.
--- -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
--- vim.list_extend(lvim.lsp.override, { "pyright" })
-
--- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pylsp", opts)
 
 -- -- you can set a custom on_attach function that will be used for all the language servers
 -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
@@ -152,36 +110,37 @@ linters.setup {
 -- Additional Plugins
 lvim.plugins = {
   -- Themes
-    {"gruvbox-community/gruvbox"},
+  { "gruvbox-community/gruvbox" },
 
   -- Others
-    {
-      "folke/trouble.nvim",
-      cmd = "TroubleToggle",
-    },
-    {"junegunn/limelight.vim"},
-    {"junegunn/goyo.vim"},                 -- On / Off - paragrafos
-    {"unblevable/quick-scope"},            -- Destaca caracter da palavra/frase na linha
-    {"terryma/vim-multiple-cursors"},      -- Altera palavas em linhas diferentes em tempo real
-    {"szw/vim-maximizer"},                 -- Minimizar/maximar buffers
-    {"tpope/vim-fugitive"},                -- vim + git
-    {"kevinhwang91/rnvimr"},               -- Ranger in a floatin window
-    {"mattn/emmet-vim"},                   -- Formata comandos com abrev. ex: htlm:5 e css / inclui tags entre os textos
-    {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'},
-    {"ThePrimeagen/harpoon"},              -- Getting you where you want with the fewest keystrokes.
-    {"preservim/vim-pencil"},              -- Facilita a escrita
-    -- {"vim-airline/vim-airline"},
-    -- {"vim-airline/vim-airline-themes"},
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+  { "junegunn/limelight.vim" },
+  { "junegunn/goyo.vim" }, -- On / Off - paragrafos
+  { "unblevable/quick-scope" }, -- Destaca caracter da palavra/frase na linha
+  { "terryma/vim-multiple-cursors" }, -- Altera palavas em linhas diferentes em tempo real
+  { "szw/vim-maximizer" }, -- Minimizar/maximar buffers
+  { "tpope/vim-fugitive" }, -- vim + git
+  -- { "kevinhwang91/rnvimr" }, -- Ranger in a floatin window
+  { "mattn/emmet-vim" }, -- Formata comandos com abrev. ex: htlm:5 e css / inclui tags entre os textos
+  { "preservim/vim-pencil" }, -- Facilita a escrita
+  { "ThePrimeagen/harpoon" }, -- Getting you where you want with the fewest keystrokes.
+  { "MattesGroeger/vim-bookmarks" }, -- Bookmarks like np++
 }
 
--- Additional Configs.
-require ("func")
-require ("map")
-require ("hack")
-
+-- { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview' },
+-- {"vim-airline/vim-airline"},
+-- {"vim-airline/vim-airline-themes"},
 
 -- Tentativa de não exibir + diagnostico virtual no código, e sim apenas na lateral
 -- vim.lsp.diagnostic.virtual_text = false
 --vim.cmd("autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()")
 
 -- vim.lsp.diagnostic.LvimFiles.show_line_diagnostics()
+
+-- Additional Configs.
+require("func")
+require("map")
+require("hack")

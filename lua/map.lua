@@ -12,6 +12,8 @@
 
 vim.cmd([[
     nnoremap <c-a>ini       :vs $HOME/.config/lvim/config.lua<cr>
+    nnoremap <c-a>cus       :vs $HOME/.config/lvim/lua/config_custom.lua<cr>
+    nnoremap <c-a>ws        :vs $HOME/.config/awesome/rc.lua<cr>
     nnoremap <c-a>hac       :vs $HOME/.config/lvim/lua/hack.lua<cr>
     nnoremap <c-a>map       :vs $HOME/.config/lvim/lua/map.lua<cr>
     nnoremap <c-a>tmu       :vs $HOME/.tmux.conf<cr>
@@ -76,8 +78,8 @@ vim.cmd("nnoremap <c-a>o    :Goyo<cr>")
 
 -- On/Off lights
 vim.cmd([[
-    nmap <c-a>ll           :Limelight<cr>
-    nmap <c-a>l0           :Limelight!<cr>
+    nmap <c-a>1             :Limelight<cr>
+    nmap <c-a>0             :Limelight!<cr>
 ]])
 
 -- Au[tocmd] capslock = scape quando entrar no vim e = capslock quando sair
@@ -136,10 +138,10 @@ vim.cmd([[
 ]])
 
 -- Ranger in a floatin window
-vim.cmd([[
-    nnoremap <silent> <c-a>j    :RnvimrToggle<CR>
-    tnoremap <silent> <c-a>j    <C-\><C-n>:RnvimrToggle<CR>
-]])
+-- vim.cmd([[
+--     nnoremap <silent> <c-a>j    :RnvimrToggle<CR>
+--     tnoremap <silent> <c-a>j    <C-\><C-n>:RnvimrToggle<CR>
+-- ]])
 
 -- Markdown
 -- nmap <C-s> <Plug>MarkdownPreview
@@ -147,9 +149,26 @@ vim.cmd([[
 vim.cmd("nmap <C-p> <Plug>MarkdownPreviewToggle")
 
 -- Ḣabilita/desabilita o destaque de coluna
-vim.cmd("nmap <c-a><space>  :set cuc!<cr>")
+vim.cmd("nmap <space><space>    :set cuc!<cr>")
+
+-- Ḣabilita/desabilita LSP
+vim.cmd("nmap <space>0          :LspStop<cr>")
+vim.cmd("nmap <space>9          :LspStart<cr>")
 
 -- lua vim.lsp.buf.formatting()
 -- keymap("n", "<c-a>f", ":Format<cr>", opts)
 -- lvim.keys.normal_mode["<c-a>f"] = ":Format<CR>"
-lvim.keys.normal_mode["<c-a>f"] = "<cmd>lua vim.lsp.buf.formatting() <CR>"
+lvim.keys.normal_mode["<c-a>b"] = "<cmd>lua vim.lsp.buf.formatting() <CR>"
+-- lvim.keys.normal_mode["<c-a>b"] = "<cmd>lua vim.lsp.buf.format { async = true } <CR>"
+-- lvim.keys.normal_mode["<c-a>v"] = "<cmd>lua vim.lsp.buf.format { async = true } <CR>"
+
+-- lua require("bufferline").cycle(1)
+lvim.keys.normal_mode["<c-a>l"] = "<cmd>BufferLineCycleNext<CR>"
+-- lua require("bufferline").cycle(-1)
+lvim.keys.normal_mode["<c-a>h"] = "<cmd>BufferLineCyclePrev<CR>"
+
+-- move linha selec. p/ cima/baixo com alt+j/alt+k - (M=ALT e S=Shift)
+vim.cmd([[
+    xnoremap <S-k>          :move '<-2<cr>gv-gv
+    xnoremap <S-j>          :move '>+1<cr>gv-gv
+]])

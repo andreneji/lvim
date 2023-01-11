@@ -91,3 +91,9 @@ vim.cmd([[nmap  <c-a>q  :call TrimWhiteSpace()<CR>]])
 
 -- Removes trailing spaces before saving
 -- vim.cmd([[autocmd BufWritePre * :%s/\s\+$//e]])
+
+-- " Bookmarkers
+-- highlight BookmarkSign ctermbg=whatever ctermfg=whatever
+-- highlight BookmarkAnnotationSign ctermbg=whatever ctermfg=whatever
+-- highlight BookmarkLine ctermbg=whatever ctermfg=whatever
+-- highlight BookmarkAnnotationLine ctermbg=whatever ctermfg=whatever
